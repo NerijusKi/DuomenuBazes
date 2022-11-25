@@ -1,0 +1,140 @@
+--CREATE DATABASE [Sandbox20221125];
+
+/*CREATE TABLE Users (
+
+    Id INT IDENTITY(1,1) PRIMARY KEY, --identity automatiskai užpildys
+    FirstName NVARCHAR(15) NOT NULL,
+    LastName NVARCHAR(20) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    IsActive BIT NOT NULL, --1 arba 0 reiksmes
+    CreationDate DATETIME DEFAULT(GETDATE()) --time stamp parodys
+);
+
+ALTER TABLE Users
+ADD Email VARCHAR(50) NOT NULL
+
+ALTER TABLE Users
+ALTER COLUMN Email VARCHAR(100)
+
+INSERT INTO dbo.Users(FirstName, LastName, DateOfBirth, IsActive, Email)
+VALUES('Jonas1', 'Jonaitis1', '1978.12.12', 0, 'jonasjonaitis1@kitm.lt')
+
+ALTER TABLE dbo.Users
+DROP COLUMN DateOfBirth --istrina stulpeli DateOfBirth
+
+BACKUP DATABASE databasename --backup ta database, bet reik privilegiju
+TO DISK = 'filepath'; --adresas, kur saugos
+
+DROP TABLE dbo.Users; --istrina lentele
+
+
+**********************************
+
+CREATE TABLE Savininkai(
+   Id INT IDENTITY(1,1) PRIMARY KEY,
+   Vardas NVARCHAR(15) NOT NULL,
+   Pavarde NVARCHAR(20) NOT NULL,
+   GimimoData DATE NOT NULL,
+);
+
+
+CREATE TABLE Automobiliai (
+     ValstybinisNumeris VARCHAR(10) PRIMARY KEY,
+     Marke VARCHAR(20) NOT NULL,
+     Modelis VARCHAR(20) NOT NULL,
+     PagaminimoData DATE NOT NULL,
+     SavininkasFk INT FOREIGN KEY REFERENCES dbo.Savininkai (Id)
+);
+**************************************
+
+CREATE TABLE Savininkai(
+   Id INT IDENTITY(1,1) PRIMARY KEY,
+   Vardas NVARCHAR(15) NOT NULL,
+   Pavarde NVARCHAR(20) NOT NULL,
+   GimimoData DATE NOT NULL,
+);
+
+
+CREATE TABLE Automobiliai (
+     ValstybinisNumeris VARCHAR(10) PRIMARY KEY,
+     Marke VARCHAR(20) NOT NULL,
+     Modelis VARCHAR(20) NOT NULL,
+     PagaminimoData DATE NOT NULL,
+     SavininkasFk INT FOREIGN KEY REFERENCES dbo.Savininkai (Id)
+);
+
+
+INSERT INTO [Savininkai] (Vardas, Pavarde, GimimoData)
+VALUES	('Menas', 'Xmenas', '1998.01.01'),
+		('Menas', 'Supermenas', '1993.02.02'),
+		('Benz', 'Mersedez', '1989.01.02')
+
+
+INSERT INTO [Automobiliai] (ValstybinisNumeris, Marke, Modelis, PagaminimoData, SavininkasFk)
+VALUES	('KKK999', 'Audi', 'TT', '1999.02.03', 1),
+		('KKK789', 'Audi', 'A3', '1988.02.03', 1),
+		('KKK679', 'Audi', 'A4', '2005.02.03', 3),
+		('KKK569', 'Audi', 'A5', '2015.02.03', 3),
+		('KKK459', 'Audi', 'A6', '2010.02.03', 2)
+
+SELECT * FROM [Sandbox20221125].[dbo].[Savininkai]
+SELECT * FROM [Sandbox20221125].[dbo].[Automobiliai]
+SELECT [Modelis] FROM [Sandbox20221125].[dbo].[Automobiliai]
+
+************************************************************
+
+CREATE TABLE Bibliotekos(
+Id int identity(13,11) PRIMARY KEY,
+Pavadinimas nvarchar(50) NOT NULL,
+Miestas nvarchar (20) NOT NULL
+
+)
+
+
+CREATE TABLE Knygos(
+Id int identity(1,1) PRIMARY KEY,
+Pavadinimas nvarchar(100) NOT NULL,
+Autorius nvarchar(30) NOT NULL,
+IsleidimoMetai Date NOT NULL
+
+
+)
+
+CREATE TABLE BibliotekosKnygos(
+BibliotekosFk INT FOREIGN KEY REFERENCES dbo.Bibliotekos (Id),
+KnygosFk INT FOREIGN KEY REFERENCES dbo.Knygos (Id)
+)
+
+INSERT INTO [Knygos] (Pavadinimas, Autorius, IsleidimoMetai)
+VALUES	('Altorių šešėly', 'Vincas Mykolaitis-Putinas', '1976.11.10'),
+		('Istorija', 'Antanas Istorikas', '1986.11.10'),
+		('Matematika', 'Matematikas Matkius', '1986.11.10'),
+		('Sporto istorija', 'Sportininkas Istorikas', '1978.11.10'),
+		('Balta Drobulė', 'Antanas Škėma', '1974.11.10'),
+		('Rugiuose, prie bedugnės', 'Sellinger', '1991.11.10')
+
+INSERT INTO [Bibliotekos] (Pavadinimas, Miestas)
+VALUES	('Kauno miesto viešoji biblioteka', 'Kaunas'),
+		('Vilniaus miesto viešoji biblioteka', 'Vilnius'),
+		('Klaipėdos miesto viešoji biblioteka', 'Klaipėda'),
+		('P.Vileišio biblioteka', 'Kaunas')
+
+
+INSERT INTO [BibliotekosKnygos] (BibliotekosFk, KnygosFk)
+VALUES	(13,5),
+		(13,4),
+		(24,2),
+		(46,6),
+		(46,4),
+		(46,5)
+/*
+DROP TABLE dbo.BibliotekosKnygos
+DROP TABLE dbo.Knygos
+DROP TABLE dbo.Bibliotekos
+*/
+
+SELECT * FROM [Bibliotekos] 
+SELECT * FROM [Knygos] 
+SELECT * FROM [BibliotekosKnygos] 
+
+*/
