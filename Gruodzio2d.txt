@@ -1,1 +1,85 @@
+CREATE TABLE Computers
+(Manufacturer NVARCHAR(20),CpuCores INT,MemorySizeGB INT)
+
+CREATE TABLE Phones
+(Manufacturer NVARCHAR(20),
+CpuCores INT,MemorySizeGB INT)
+INSERT INTO 
+Computers VALUES('Dell', 2, 8),
+	('Hp', 4, 16),
+	('Asus', 2, 16),
+	('Samsung', 8, 32)
+INSERT INTO 
+Phones VALUES('Dell', 2, 8),
+	('Hp', 4, 8),
+	('Apple', 1, 2),
+	('Samsung', 8, 32)
+	
+	
+	
+SELECT * FROM Computers
+SELECT * FROM Phones
+
+
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Computers
+UNION
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Phones;
+
+
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Computers
+UNION ALL
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Phones;
+
+
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Phones
+EXCEPT
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Computers;
+
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Computers
+EXCEPT
+SELECT Manufacturer, CpuCores, MemorySizeGB FROM Phones;
+
+SELECT * FROM Orders
+SELECT * FROM Users
+
+SELECT * FROM Orders
+INNER JOIN Users
+ON Orders.User_FK = Users.Id
+
+SELECT U.FirstName, U.LastName, O.OrderNumber , O.ProductName 
+FROM Orders AS O
+INNER JOIN Users AS U
+ON O.User_FK = U.Id
+ORDER BY O.OrderNumber DESC
+
+SELECT Users.FirstName, Users.LastName, Count(Orders.OrderNumber) AS UzsakymuSkaicius --AS Idedda stulpeliu skaiciu, Count suskaiciuoja, kiek uzsakymu
+FROM Users
+LEFT JOIN Orders
+ON Orders.User_FK = Users.Id
+GROUP BY Users.FirstName, Users.LastName
+
+
+SELECT Orders.OrderNumber, Orders.ProductName, Users.FirstName, Users.LastName 
+FROM Orders 
+LEFT JOIN Users
+ON Orders.User_FK = Users.Id
+
+SELECT Users.FirstName, Orders.*
+FROM Orders
+LEFT JOIN  Users
+ON Users.Id = Orders.User_FK
+
+SELECT *
+FROM Users
+FULL JOIN Orders
+ON USers.Id = Orders.User_FK
+
+
+SELECT *
+FROM(SELECT *FROM Users WHERE FirstName = 'Arunas') Users
+Left JOIN Orders
+ON Users.Id = Orders.User_FK
+Left JOIN AddressDetails
+ON Orders.AddressDetails_Fk = AddressDetails.Id
+
 
